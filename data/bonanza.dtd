@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Order placement data for Barker Bob's Burger Bar
+-->
+
+
+<!-- 
+An order identifies the customer, order type, burgers,
+and anything special 
+-->
+<!ELEMENT order (customer, delivery?, burger+, special?)>
+
+<!-- A customer is identified simply by their name -->
+<!ELEMENT customer (#PCDATA)>
+
+<!-- An order can be for eat-in, takeout or delivery -->
+<!ATTLIST order
+	type (eatin|takeout|delivery) #REQUIRED
+>
+
+<!-- An order to be delivered will need delivery instructions -->
+<!ELEMENT delivery (#PCDATA)>
+
+<!-- Let's provide for any special instructions -->
+<!ELEMENT special (#PCDATA)>
+
+<!-- Burgers will be specified individually -->
+<!ELEMENT burger (patty, cheeses?, topping*, sauce*, instructions?, name?)>
+
+<!-- patty element and types! -->
+<!ELEMENT patty (#PCDATA)>
+<!ATTLIST patty
+	type (beef|pork|turkey|bison|veggie) "beef"
+>
+
+<!-- cheeses! -->
+<!ELEMENT cheeses EMPTY>
+<!ATTLIST cheeses
+	top (american|swiss|jack|blue|gruyere|gouda|aged|goat|brie) #IMPLIED
+	bottom (american|swiss|jack|blue|gruyere|gouda|aged|goat|brie) #IMPLIED
+>
+
+<!-- topping -->
+<!ELEMENT topping (#PCDATA)>
+<!ATTLIST topping
+	type (lettuce|tomato|raw|dill|roasted|shrooms|salsa|bacon|chilies|fkchili|avocado|egg|porkbelly) #REQUIRED
+>
+
+<!-- sauces -->
+<!ELEMENT sauce EMPTY>
+<!ATTLIST sauce
+	type (ketchup|mustard|mayo|fksauce) #REQUIRED
+>
+
+<!-- special instructions - could be anything -->
+<!ELEMENT instructions (#PCDATA)>
+
+<!-- optional name for the burger creation -->
+<!ELEMENT name (#PCDATA)>
